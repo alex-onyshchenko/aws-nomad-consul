@@ -58,6 +58,7 @@ jobs:
     steps:
       - name: Invoke deploy Lambda
         uses: gagoar/invoke-aws-lambda@master
+        continue-on-error: true
         id: lambda_inv
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
