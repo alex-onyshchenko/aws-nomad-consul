@@ -31,9 +31,7 @@ jobs:
         with:
           push: true
           builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            dev936/aws-nomad-consul:latest
-            dev936/aws-nomad-consul:${{ github.sha }}
+          tags: dev936/aws-nomad-consul:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       
@@ -51,5 +49,8 @@ jobs:
         env:
           SOURCE_NAME: ${{ steps.branch_name.outputs.SOURCE_NAME }}
           SOURCE_BRANCH: ${{ steps.branch_name.outputs.SOURCE_BRANCH }}
-          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}        
+          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+          
+      - name: Test
+        run: ls    
           
