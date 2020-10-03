@@ -58,8 +58,11 @@ jobs:
     steps:
       - name: Invoke deploy Lambda
         uses: gagoar/invoke-aws-lambda@master
+        id: lambda_inv
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           FunctionName: deploy-lambda
           Payload: '{ "repo": "${{ github.repository }}", "sha": "${{ github.sha }}"}'
+      - name: Output
+        run: echo ${{ steps.lambda_inv.outputs.response }}
